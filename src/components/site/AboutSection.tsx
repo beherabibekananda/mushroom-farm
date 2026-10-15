@@ -40,7 +40,7 @@ export function AboutSection() {
           </h2>
           <p className="mt-5 text-base sm:text-lg leading-relaxed text-muted-foreground">
             <strong>{SITE.name}</strong> was established in {SITE.estYear} as a {SITE.legalStatus} by{" "}
-            <strong>{SITE.founder}</strong>. Operating as a {SITE.businessType} of Fresh, Dry and White Oyster
+            <strong>{SITE.founder}</strong>. Operating as a {SITE.businessType} of Fresh and Dry Oyster
             Mushrooms, we are proudly based in Varanasi, Uttar Pradesh.
           </p>
           <p className="mt-3 text-base sm:text-lg leading-relaxed text-muted-foreground">

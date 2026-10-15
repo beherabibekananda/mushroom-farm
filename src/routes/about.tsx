@@ -54,9 +54,8 @@ function AboutPage() {
             </h2>
             <p className="mt-3 sm:mt-5 text-base sm:text-lg text-muted-foreground">
               {SITE.name} was established as a {SITE.legalStatus} in {SITE.estYear}. Under the leadership of{" "}
-              {SITE.founder}, we operate as a {SITE.businessType} of Fresh Oyster Mushroom, Dry Oyster Mushroom
-              and White Oyster Mushroom — offering products at reasonable rates and delivering within the
-              promised timeframe to customers across India.
+              {SITE.founder}, we operate as a {SITE.businessType} of Fresh Oyster Mushroom and Dry Oyster Mushroom
+              — offering products at reasonable rates and delivering within the promised timeframe to customers across India.
             </p>
           </Reveal>
 

@@ -10,7 +10,7 @@ export function Hero() {
       id="home"
       className="relative flex h-screen min-h-[100svh] w-full items-center justify-center overflow-hidden bg-[#162719]"
     >
-      {/* Edge-to-edge full screen natural background image for desktop & laptops */}
+      {/* Natural background image: positioned object-[65%_center] on mobile to focus the Shiva Agro pack, centered on desktop */}
       <img
         src={heroBanner}
         alt="Shiva Agro — Freshness from Nature to Your Table. Premium Oyster Mushrooms, Fresh & Dry Mushrooms"
@@ -18,12 +18,18 @@ export function Hero() {
         height={576}
         fetchPriority="high"
         loading="eager"
-        className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none select-none"
+        className="absolute inset-0 h-full w-full object-cover object-[62%_center] md:object-center pointer-events-none select-none transition-all duration-300"
       />
 
-      {/* Gentle top gradient so navigation links are always crystal clear against the sky */}
+      {/* Top gradient for navbar clarity */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-32 sm:h-36 bg-gradient-to-b from-black/65 via-black/30 to-transparent z-10"
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 sm:h-36 bg-gradient-to-b from-black/75 via-black/35 to-transparent z-10"
+        aria-hidden="true"
+      />
+
+      {/* Mobile-only bottom vignette so floating buttons stand out against the wooden tabletop */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/85 via-black/40 to-transparent z-10 md:hidden"
         aria-hidden="true"
       />
 
@@ -53,7 +59,14 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Mobile Action Bar: Positioned above the fixed bottom bar (bottom-20) with zero overlap */}
+      {/* Mobile Top Brand Pill (subtle and elegant below the navbar) */}
+      <div className="absolute inset-x-0 top-20 z-20 flex flex-col items-center px-4 md:hidden pointer-events-none">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-black/55 backdrop-blur-md px-3.5 py-1 text-[11px] font-semibold tracking-wider uppercase text-gold border border-gold/40 shadow-lg">
+          🌿 100% Natural Oyster Mushrooms
+        </span>
+      </div>
+
+      {/* Mobile Action Bar: Positioned safely above the fixed bottom bar with zero overlap */}
       <div className="absolute inset-x-0 bottom-20 z-20 flex flex-col items-center px-4 md:hidden">
         <div className="flex w-full max-w-xs flex-col gap-2">
           <Btn
