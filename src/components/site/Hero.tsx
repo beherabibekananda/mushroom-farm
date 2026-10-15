@@ -53,23 +53,23 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Mobile-Friendly CTAs for narrow smartphone screens where 16:9 scales proportionally */}
-      <div className="absolute inset-x-0 bottom-6 z-20 flex flex-col items-center px-4 md:hidden">
-        <div className="flex w-full max-w-sm flex-col gap-2.5">
-          <Btn href="/order" variant="gold" className="w-full justify-center shadow-2xl shadow-gold/30 py-3 text-sm font-bold border border-gold/40">
-            🛒 Order Now <ArrowRight size={16} />
+      {/* Mobile Action Bar: Positioned above the fixed bottom bar (bottom-20) with zero overlap */}
+      <div className="absolute inset-x-0 bottom-20 z-20 flex flex-col items-center px-4 md:hidden">
+        <div className="flex w-full max-w-xs flex-col gap-2">
+          <Btn
+            href="/order"
+            variant="gold"
+            className="w-full justify-center shadow-[0_8px_25px_rgba(212,160,23,0.45)] py-3 text-sm font-bold border border-gold/50"
+          >
+            🛒 Order Fresh & Dry <ArrowRight size={16} />
           </Btn>
-          <Btn href="/products" variant="ghostLight" className="w-full justify-center py-2.5 text-sm bg-black/60 backdrop-blur-md border border-white/20 text-white font-semibold shadow-lg">
-            Explore Products <ArrowRight size={15} />
+          <Btn
+            href="/products"
+            variant="ghostLight"
+            className="w-full justify-center py-2.5 text-xs bg-black/60 backdrop-blur-md border border-white/25 text-white font-medium"
+          >
+            Explore Product Range <ArrowRight size={14} />
           </Btn>
-          <div className="grid grid-cols-2 gap-2">
-            <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="justify-center py-2.5 text-xs bg-[#25D366]/20 border border-[#25D366]/50 text-white font-semibold backdrop-blur-md">
-              <MessageCircle size={15} className="text-[#25D366]" /> WhatsApp
-            </Btn>
-            <Btn href="/contact" variant="ghostLight" className="justify-center py-2.5 text-xs bg-black/60 border border-white/20 text-white font-semibold backdrop-blur-md">
-              Get a Quote
-            </Btn>
-          </div>
         </div>
       </div>
 

@@ -114,10 +114,30 @@ export function Navbar() {
         )}
       </header>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 gap-px border-t border-border/80 bg-border shadow-soft md:hidden pb-[env(safe-area-inset-bottom)]">
-        <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="flex items-center justify-center gap-1.5 bg-card py-3.5 text-xs font-semibold text-primary"><Phone size={15} /> Call</a>
-        <a href="/order" className="flex items-center justify-center gap-1.5 bg-gold text-accent-foreground py-3.5 text-xs font-bold">🛒 Order</a>
-        <a href={waLink()} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-1.5 bg-primary py-3.5 text-xs font-semibold text-primary-foreground"><MessageCircle size={15} /> WhatsApp</a>
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 gap-0 border-t border-white/10 bg-[#0d1c12]/95 backdrop-blur-xl shadow-[0_-5px_25px_rgba(0,0,0,0.5)] md:hidden pb-[env(safe-area-inset-bottom)]">
+        <a
+          href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+          className="flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-semibold text-white/90 hover:text-gold transition-colors active:bg-white/5"
+        >
+          <Phone size={17} className="text-white/80" />
+          <span>Call Us</span>
+        </a>
+        <a
+          href="/order"
+          className="flex flex-col items-center justify-center gap-1 bg-gold text-[#0f1f14] py-2.5 text-[11px] font-bold shadow-md shadow-gold/20 active:brightness-95"
+        >
+          <span className="text-base leading-none">🛒</span>
+          <span>Order Now</span>
+        </a>
+        <a
+          href={waLink()}
+          target="_blank"
+          rel="noreferrer"
+          className="flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-semibold text-[#25D366] hover:brightness-110 transition-colors active:bg-white/5"
+        >
+          <MessageCircle size={17} className="text-[#25D366]" />
+          <span>WhatsApp</span>
+        </a>
       </div>
     </>
   );
