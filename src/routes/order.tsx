@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { PRODUCTS, SITE } from "@/lib/site";
 import { CartProvider, useCart, type CartItem, type Unit } from "@/lib/cart";
 import {
@@ -859,8 +859,23 @@ function OrderPage() {
   const [step, setStep] = useState(0);
   const [address, setAddress] = useState<Address>(EMPTY_ADDRESS);
 
-  const next = useCallback(() => setStep((s) => Math.min(s + 1, 2)), []);
-  const back = useCallback(() => setStep((s) => Math.max(s - 1, 0)), []);
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const next = useCallback(() => {
+    setStep((s) => Math.min(s + 1, 2));
+    scrollToTop();
+  }, []);
+
+  const back = useCallback(() => {
+    setStep((s) => Math.max(s - 1, 0));
+    scrollToTop();
+  }, []);
+
+  useEffect(() => {
+    scrollToTop();
+  }, [step]);
 
   return (
     <div className="min-h-screen bg-background pt-[72px]">
