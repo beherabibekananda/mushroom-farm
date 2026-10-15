@@ -56,30 +56,33 @@ export function Hero() {
       {/* Mobile-Friendly CTAs for narrow smartphone screens where 16:9 scales proportionally */}
       <div className="absolute inset-x-0 bottom-6 z-20 flex flex-col items-center px-4 md:hidden">
         <div className="flex w-full max-w-sm flex-col gap-2.5">
-          <Btn href="/order" variant="gold" className="w-full justify-center shadow-lg shadow-black/50 py-3 text-sm">
+          <Btn href="/order" variant="gold" className="w-full justify-center shadow-2xl shadow-gold/30 py-3 text-sm font-bold border border-gold/40">
             🛒 Order Now <ArrowRight size={16} />
           </Btn>
-          <Btn href="/products" variant="ghostLight" className="w-full justify-center py-2.5 text-sm bg-black/50 backdrop-blur-md">
+          <Btn href="/products" variant="ghostLight" className="w-full justify-center py-2.5 text-sm bg-black/60 backdrop-blur-md border border-white/20 text-white font-semibold shadow-lg">
             Explore Products <ArrowRight size={15} />
           </Btn>
           <div className="grid grid-cols-2 gap-2">
-            <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="justify-center py-2.5 text-xs bg-black/50 backdrop-blur-md">
-              <MessageCircle size={15} /> WhatsApp
+            <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="justify-center py-2.5 text-xs bg-[#25D366]/20 border border-[#25D366]/50 text-white font-semibold backdrop-blur-md">
+              <MessageCircle size={15} className="text-[#25D366]" /> WhatsApp
             </Btn>
-            <Btn href="/contact" variant="ghostLight" className="justify-center py-2.5 text-xs bg-black/50 backdrop-blur-md">
+            <Btn href="/contact" variant="ghostLight" className="justify-center py-2.5 text-xs bg-black/60 border border-white/20 text-white font-semibold backdrop-blur-md">
               Get a Quote
             </Btn>
           </div>
         </div>
       </div>
 
-      {/* Desktop: floating Order Now pill, always visible over the banner */}
-      <div className="hidden md:flex absolute left-8 bottom-10 z-20 flex-col gap-3">
-        <Btn href="/order" variant="gold" className="shadow-xl shadow-black/40 text-sm">
-          🛒 Order Now <ArrowRight size={15} />
+      {/* Desktop: floating Order Now & WhatsApp pill dock */}
+      <div className="hidden md:flex absolute left-8 bottom-10 z-20 items-center gap-3 bg-black/45 backdrop-blur-xl p-2 rounded-full border border-white/15 shadow-[0_10px_35px_rgba(0,0,0,0.5)]">
+        <Btn href="/order" variant="gold" className="shadow-lg shadow-gold/30 text-xs font-bold px-5 py-2.5 hover:scale-105 transition-all">
+          🛒 Order Now <ArrowRight size={14} />
         </Btn>
-        <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="text-xs bg-black/40 backdrop-blur-md border-white/30 text-white">
-          <MessageCircle size={14} /> WhatsApp Us
+        <Btn href="/products" variant="ghostLight" className="text-xs font-semibold px-4 py-2.5 bg-white/10 hover:bg-white/20 border-white/20 text-white hover:scale-105 transition-all">
+          View Products
+        </Btn>
+        <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="text-xs font-semibold px-4 py-2.5 bg-[#25D366]/20 hover:bg-[#25D366]/30 border-[#25D366]/40 text-white hover:scale-105 transition-all">
+          <MessageCircle size={14} className="text-[#25D366]" /> WhatsApp Us
         </Btn>
       </div>
     </section>
