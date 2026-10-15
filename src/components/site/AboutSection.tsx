@@ -1,4 +1,5 @@
-import about from "@/assets/about.jpg";
+import about from "@/assets/about.webp";
+import logoImg from "@/assets/logo.webp";
 import { SITE } from "@/lib/site";
 import { Btn, Leaf, Reveal } from "./primitives";
 
@@ -22,9 +23,12 @@ export function AboutSection() {
             height={1280}
             className="aspect-[4/5] w-full rounded-2xl object-cover shadow-soft"
           />
-          <div className="absolute -bottom-6 -right-4 hidden rounded-xl bg-primary px-7 py-5 text-primary-foreground shadow-soft md:block">
-            <p className="font-serif text-3xl italic text-gold">Farm to you</p>
-            <p className="text-xs uppercase tracking-[0.2em] opacity-80">Handled with care</p>
+          <div className="absolute -bottom-6 -right-4 hidden rounded-2xl bg-forest p-3.5 text-forest-foreground shadow-xl border border-gold/30 md:flex items-center gap-3.5">
+            <img src={logoImg} alt={SITE.name} className="h-12 w-12 rounded-full object-cover border border-gold/50 bg-white" />
+            <div>
+              <p className="font-serif text-lg font-bold text-gold leading-tight">{SITE.name}</p>
+              <p className="text-[10px] uppercase tracking-widest text-forest-foreground/80">Fresh & Dry Mushrooms</p>
+            </div>
           </div>
         </Reveal>
         <Reveal delay={150}>

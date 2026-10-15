@@ -1,76 +1,86 @@
-import { useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
-import hero from "@/assets/hero.jpg";
-import fresh from "@/assets/fresh-oyster.jpg";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import heroBanner from "@/assets/landing-banner.webp";
+import { SITE, waLink } from "@/lib/site";
 import { Btn } from "./primitives";
 
 export function Hero() {
-  const img = useRef<HTMLImageElement>(null);
-  useEffect(() => {
-    const on = () => {
-      if (img.current) img.current.style.transform = `translateY(${window.scrollY * 0.25}px) scale(1.08)`;
-    };
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
-  }, []);
-
   return (
-    <section id="home" className="grain relative flex min-h-[100svh] items-center overflow-hidden bg-forest">
+    <section
+      id="home"
+      className="relative flex h-screen min-h-[100svh] w-full items-center justify-center overflow-hidden bg-[#162719]"
+    >
+      {/* Edge-to-edge full screen natural background image for desktop & laptops */}
       <img
-        ref={img}
-        src={hero}
-        alt="Oyster mushrooms growing in a cultivation farm"
-        width={1920}
-        height={1088}
-        className="absolute inset-0 h-full w-full scale-[1.08] object-cover will-change-transform"
+        src={heroBanner}
+        alt="Shiva Agro — Freshness from Nature to Your Table. Premium Oyster Mushrooms, Fresh & Dry Mushrooms"
+        width={1024}
+        height={576}
+        fetchPriority="high"
+        loading="eager"
+        className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none select-none"
       />
-      <div className="absolute inset-0 bg-hero-overlay" />
-      <div className="relative mx-auto grid w-full max-w-7xl items-end gap-10 px-4 pb-28 pt-28 sm:px-6 sm:pb-24 sm:pt-36 md:px-8 lg:grid-cols-[1.4fr_1fr]">
-        <div className="text-forest-foreground">
-          <p className="eyebrow animate-rise text-[0.68rem] sm:text-xs">Quality • Freshness • Trust</p>
-          <h1 className="mt-4 text-3xl font-medium leading-[1.05] tracking-tight animate-rise [animation-delay:150ms] sm:mt-6 sm:text-5xl md:text-6xl lg:text-[5.2rem]">
-            Premium Agro Products,
-            <br />
-            <em className="font-light text-gold">Grown with Purpose.</em>
-          </h1>
-          <p className="mt-5 max-w-xl text-base text-forest-foreground/85 animate-rise [animation-delay:300ms] sm:mt-7 sm:text-lg">
-            We bring carefully cultivated and quality-checked agricultural products from trusted sources to customers across India.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 animate-rise [animation-delay:450ms] sm:mt-9 sm:flex-row sm:flex-wrap">
-            <Btn href="/products" variant="gold" className="w-full justify-center sm:w-auto">
-              Explore Products <ArrowRight size={16} />
+
+      {/* Gentle top gradient so navigation links are always crystal clear against the sky */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-32 sm:h-36 bg-gradient-to-b from-black/65 via-black/30 to-transparent z-10"
+        aria-hidden="true"
+      />
+
+      {/* Screen Reader & Accessible SEO Headings */}
+      <div className="sr-only">
+        <h1>{SITE.name} — Freshness from Nature to Your Table</h1>
+        <p>Premium Oyster Mushrooms: Fresh, Nutritious, Natural. 100% Natural, No Preservatives, Rich in Nutrition, Healthy Lifestyle.</p>
+        <p>Fresh and Dry Oyster Mushrooms Cultivation & Supply Across India. Shiva Agro, Varanasi, Uttar Pradesh.</p>
+      </div>
+
+      {/* Interactive Hotspot container mapped directly over the 'Explore Our Products ->' button */}
+      <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
+        <div className="relative w-full h-full max-w-[1920px]">
+          <Link
+            to="/products"
+            aria-label="Explore Our Products"
+            style={{
+              left: "13.6%",
+              top: "62.2%",
+              width: "23.8%",
+              height: "12.5%",
+            }}
+            className="pointer-events-auto absolute hidden md:block rounded-full transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(76,175,80,0.6)] focus:outline-none focus:ring-4 focus:ring-gold/60 cursor-pointer"
+          >
+            <span className="sr-only">Explore Our Products</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Mobile-Friendly CTAs for narrow smartphone screens where 16:9 scales proportionally */}
+      <div className="absolute inset-x-0 bottom-6 z-20 flex flex-col items-center px-4 md:hidden">
+        <div className="flex w-full max-w-sm flex-col gap-2.5">
+          <Btn href="/order" variant="gold" className="w-full justify-center shadow-lg shadow-black/50 py-3 text-sm">
+            🛒 Order Now <ArrowRight size={16} />
+          </Btn>
+          <Btn href="/products" variant="ghostLight" className="w-full justify-center py-2.5 text-sm bg-black/50 backdrop-blur-md">
+            Explore Products <ArrowRight size={15} />
+          </Btn>
+          <div className="grid grid-cols-2 gap-2">
+            <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="justify-center py-2.5 text-xs bg-black/50 backdrop-blur-md">
+              <MessageCircle size={15} /> WhatsApp
             </Btn>
-            <Btn href="/contact" variant="ghostLight" className="w-full justify-center sm:w-auto">
+            <Btn href="/contact" variant="ghostLight" className="justify-center py-2.5 text-xs bg-black/50 backdrop-blur-md">
               Get a Quote
             </Btn>
           </div>
-          <div className="mt-8 flex items-center gap-3 text-xs text-forest-foreground/70 animate-rise [animation-delay:600ms] sm:mt-10 sm:text-sm">
-            <span className="h-px w-8 bg-gold sm:w-10" /> Serving Customers Across India
-          </div>
         </div>
+      </div>
 
-        <div className="hidden justify-end lg:flex">
-          <div className="glass w-72 animate-floaty rounded-2xl p-3 text-forest-foreground">
-            <img
-              src={fresh}
-              alt="Fresh oyster mushrooms"
-              width={1024}
-              height={1024}
-              className="aspect-[4/3] w-full rounded-xl object-cover"
-            />
-            <div className="px-2 pb-2 pt-4">
-              <p className="eyebrow">Featured</p>
-              <p className="mt-1 font-serif text-2xl">Fresh Oyster Mushroom</p>
-              <Link
-                to="/products"
-                className="mt-2 inline-flex items-center gap-1 text-sm text-forest-foreground/80 transition-colors hover:text-gold"
-              >
-                View range <ArrowRight size={14} />
-              </Link>
-            </div>
-          </div>
-        </div>
+      {/* Desktop: floating Order Now pill, always visible over the banner */}
+      <div className="hidden md:flex absolute left-8 bottom-10 z-20 flex-col gap-3">
+        <Btn href="/order" variant="gold" className="shadow-xl shadow-black/40 text-sm">
+          🛒 Order Now <ArrowRight size={15} />
+        </Btn>
+        <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="text-xs bg-black/40 backdrop-blur-md border-white/30 text-white">
+          <MessageCircle size={14} /> WhatsApp Us
+        </Btn>
       </div>
     </section>
   );

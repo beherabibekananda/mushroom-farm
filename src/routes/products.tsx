@@ -7,7 +7,7 @@ import { BulkCta, TrustSection } from "@/components/site/Sections";
 import { Reveal } from "@/components/site/primitives";
 
 const title = `Products | ${SITE.name} - Fresh & Dry Oyster Mushrooms`;
-const description = `Browse ${SITE.name}'s collection of Fresh Oyster, Dry Oyster, and White Oyster mushrooms. High nutrition, premium grade, available in retail & wholesale bulk.`;
+const description = `Browse ${SITE.name}'s collection of Fresh Oyster and Dry Oyster mushrooms. High nutrition, premium grade, available in retail & wholesale bulk.`;
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -28,7 +28,7 @@ const guides = [
     tag: "High Moisture & Umami",
     shelfLife: "5 – 7 days refrigerated (3°C - 5°C)",
     culinary: "Stir-fries, curries, soups, pasta, and pan-seared with herbs.",
-    handling: "Keep in ventilated paper bags or breathable crates; do not wash until ready to cook.",
+    handling: "Keep in ventilated containers; do not wash until ready to cook.",
   },
   {
     name: "Dry Oyster Mushroom",
@@ -36,13 +36,6 @@ const guides = [
     shelfLife: "6 – 12 months in airtight container",
     culinary: "Rich broths, gravies, mushroom powders, dietary supplements, seasonings.",
     handling: "Rehydrate in lukewarm water for 15-20 minutes before culinary preparation.",
-  },
-  {
-    name: "White Oyster Mushroom",
-    tag: "Delicate & Gourmet",
-    shelfLife: "5 – 7 days refrigerated (3°C - 5°C)",
-    culinary: "Continental cuisines, gourmet risottos, tempura, and light sauces.",
-    handling: "Store in cool environment, gently wipe with damp towel before cooking.",
   },
 ];
 
@@ -53,7 +46,7 @@ function ProductsPage() {
         eyebrow="Our Harvest"
         title="Premium Mushroom"
         titleAccent="Collection."
-        subtitle="Explore our naturally grown Fresh, Dry, and White Oyster mushroom selections, carefully graded for kitchens, restaurants, and bulk supply."
+        subtitle="Explore our naturally grown Fresh and Dry Oyster mushroom selections, carefully graded for kitchens, restaurants, and bulk supply."
         breadcrumb="Products"
       />
 
@@ -72,7 +65,7 @@ function ProductsPage() {
             </p>
           </Reveal>
 
-          <div className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-3">
+          <div className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-2 max-w-4xl mx-auto">
             {guides.map((g, i) => (
               <Reveal key={g.name} delay={i * 120} className="flex flex-col rounded-2xl border border-border bg-card p-5 sm:p-8 shadow-soft">
                 <span className="inline-block w-fit rounded-full bg-secondary px-3 py-1 text-xs font-semibold text-primary">
