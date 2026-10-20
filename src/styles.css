@@ -80,13 +80,14 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    background-color: var(--color-background);
+    background-color: #0d1c12;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     max-width: 100%;
     width: 100%;
+    min-height: 100vh;
     position: relative;
   }
   img, video, canvas, svg {

@@ -12,7 +12,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { SITE } from "@/lib/site";
@@ -42,9 +41,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -96,7 +92,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap",
       },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", href: "/logo.webp", type: "image/webp" },
+      { rel: "apple-touch-icon", href: "/logo.webp" },
     ],
   }),
   shellComponent: RootShell,
@@ -121,14 +119,16 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isHome = pathname === "/";
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Navbar />
-      <Outlet />
-      {!isHome && <Footer />}
+      <div className="flex min-h-screen flex-col bg-[#0d1c12]">
+        <Navbar />
+        <div className="flex-1">
+          <Outlet />
+        </div>
+        <Footer />
+      </div>
     </QueryClientProvider>
   );
 }

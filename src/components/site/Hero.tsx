@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import heroBanner from "@/assets/landing-banner.webp";
+import heroBannerMobile from "@/assets/landing-banner-mobile.webp";
 import { SITE, waLink } from "@/lib/site";
 import { Btn } from "./primitives";
 
@@ -8,28 +9,46 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex h-screen min-h-[100svh] w-full items-center justify-center overflow-hidden bg-[#162719]"
+      className="relative flex min-h-0 md:min-h-[100svh] w-full items-center justify-center overflow-hidden bg-[#0d1c12]"
     >
-      {/* Natural background image: positioned object-[65%_center] on mobile to focus the Shiva Agro pack, centered on desktop */}
-      <img
-        src={heroBanner}
-        alt="Shiva Agro — Freshness from Nature to Your Table. Premium Oyster Mushrooms, Fresh & Dry Mushrooms"
-        width={1024}
-        height={576}
-        fetchPriority="high"
-        loading="eager"
-        className="absolute inset-0 h-full w-full object-cover object-[62%_center] md:object-center pointer-events-none select-none transition-all duration-300"
-      />
-
-      {/* Top gradient for navbar clarity */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-28 sm:h-36 bg-gradient-to-b from-black/75 via-black/35 to-transparent z-10"
+      {/* Mobile blurred atmospheric background to create a realistic, immersive depth of field */}
+      <div 
+        className="absolute inset-0 md:hidden bg-cover bg-center scale-110 blur-2xl opacity-40 pointer-events-none select-none brightness-75"
+        style={{ backgroundImage: `url(${heroBannerMobile})` }}
         aria-hidden="true"
       />
 
-      {/* Mobile-only bottom vignette so floating buttons stand out against the wooden tabletop */}
+      {/* Mobile ambient lighting glow behind the poster */}
+      <div 
+        className="absolute inset-0 md:hidden pointer-events-none bg-[radial-gradient(circle_at_center,rgba(40,75,45,0.45)_0%,rgba(13,28,18,0.95)_75%)]"
+        aria-hidden="true"
+      />
+
+      {/* Main image container */}
+      <div className="relative z-10 w-full flex items-center justify-center pt-16 pb-6 px-3 sm:px-4 md:p-0 md:h-full md:min-h-[100svh]">
+        <picture className="w-full max-w-sm sm:max-w-md md:max-w-none md:absolute md:inset-0 pointer-events-none select-none flex items-center justify-center">
+          <source media="(max-width: 767px)" srcSet={heroBannerMobile} type="image/webp" />
+          <img
+            src={heroBanner}
+            alt="Shiva Agro — Freshness from Nature to Your Table. Premium Oyster Mushrooms, Fresh & Dry Mushrooms"
+            width={1024}
+            height={576}
+            fetchPriority="high"
+            loading="eager"
+            className="w-full h-auto rounded-2xl md:rounded-none object-contain md:object-cover object-center shadow-[0_15px_40px_rgba(0,0,0,0.6)] md:shadow-none border border-white/10 md:border-none transition-all duration-300 md:h-full md:w-full"
+          />
+        </picture>
+      </div>
+
+      {/* Top subtle gradient for navbar readability */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/85 via-black/40 to-transparent z-10 md:hidden"
+        className="pointer-events-none absolute inset-x-0 top-0 h-20 sm:h-24 bg-gradient-to-b from-[#0d1c12]/90 via-[#0d1c12]/50 to-transparent z-20"
+        aria-hidden="true"
+      />
+
+      {/* Bottom subtle fade */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#0d1c12] to-transparent z-20 md:hidden"
         aria-hidden="true"
       />
 
@@ -42,7 +61,8 @@ export function Hero() {
 
       {/* Interactive Hotspot container mapped directly over the 'Explore Our Products ->' button */}
       <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
-        <div className="relative w-full h-full max-w-[1920px]">
+        {/* Desktop hotspot over horizontal banner */}
+        <div className="relative w-full h-full max-w-[1920px] hidden md:block">
           <Link
             to="/products"
             aria-label="Explore Our Products"
@@ -52,37 +72,21 @@ export function Hero() {
               width: "23.8%",
               height: "12.5%",
             }}
-            className="pointer-events-auto absolute hidden md:block rounded-full transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(76,175,80,0.6)] focus:outline-none focus:ring-4 focus:ring-gold/60 cursor-pointer"
+            className="pointer-events-auto absolute rounded-full transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(76,175,80,0.6)] focus:outline-none focus:ring-4 focus:ring-gold/60 cursor-pointer"
           >
             <span className="sr-only">Explore Our Products</span>
           </Link>
         </div>
-      </div>
 
-      {/* Mobile Top Brand Pill (subtle and elegant below the navbar) */}
-      <div className="absolute inset-x-0 top-20 z-20 flex flex-col items-center px-4 md:hidden pointer-events-none">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-black/55 backdrop-blur-md px-3.5 py-1 text-[11px] font-semibold tracking-wider uppercase text-gold border border-gold/40 shadow-lg">
-          🌿 100% Natural Oyster Mushrooms
-        </span>
-      </div>
-
-      {/* Mobile Action Bar: Positioned safely above the fixed bottom bar with zero overlap */}
-      <div className="absolute inset-x-0 bottom-20 z-20 flex flex-col items-center px-4 md:hidden">
-        <div className="flex w-full max-w-xs flex-col gap-2">
-          <Btn
-            href="/order"
-            variant="gold"
-            className="w-full justify-center shadow-[0_8px_25px_rgba(212,160,23,0.45)] py-3 text-sm font-bold border border-gold/50"
+        {/* Mobile hotspot mapped directly over the hero area linking to products */}
+        <div className="relative w-full h-full max-w-[500px] md:hidden">
+          <Link
+            to="/products"
+            aria-label="Explore Our Products"
+            className="pointer-events-auto absolute inset-0 focus:outline-none"
           >
-            🛒 Order Fresh & Dry <ArrowRight size={16} />
-          </Btn>
-          <Btn
-            href="/products"
-            variant="ghostLight"
-            className="w-full justify-center py-2.5 text-xs bg-black/60 backdrop-blur-md border border-white/25 text-white font-medium"
-          >
-            Explore Product Range <ArrowRight size={14} />
-          </Btn>
+            <span className="sr-only">Explore Our Products</span>
+          </Link>
         </div>
       </div>
 

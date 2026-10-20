@@ -71,13 +71,6 @@ export function Navbar() {
             >
               🛒 Order Now
             </Btn>
-            <Btn
-              href="/contact"
-              variant="ghostLight"
-              className="hidden px-4 py-2 sm:inline-flex text-xs font-semibold bg-white/10 hover:bg-white/20 border-white/25 text-white hover:scale-105 transition-all backdrop-blur-sm"
-            >
-              Get a Quote
-            </Btn>
             <button
               aria-label="Toggle menu"
               onClick={() => setOpen(!open)}
@@ -105,10 +98,9 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <div className="mt-5 grid grid-cols-2 gap-3">
+            <div className="mt-5 grid grid-cols-1 gap-2.5">
               <Btn href="/order" variant="gold" className="justify-center shadow-md shadow-gold/30" onClick={() => setOpen(false)}>🛒 Order Now</Btn>
-              <Btn href="/contact" variant="ghostLight" className="justify-center bg-white/10 text-white border-white/20" onClick={() => setOpen(false)}>Get a Quote</Btn>
-              <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="justify-center col-span-2 bg-[#25D366]/20 border-[#25D366]/50 text-white"><MessageCircle size={16} className="text-[#25D366]" /> WhatsApp Us</Btn>
+              <Btn href={waLink()} target="_blank" rel="noreferrer" variant="ghostLight" className="justify-center bg-[#25D366]/20 border-[#25D366]/50 text-white"><MessageCircle size={16} className="text-[#25D366]" /> WhatsApp Us</Btn>
             </div>
           </div>
         )}

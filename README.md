@@ -1,18 +1,7 @@
-# Pixel Perfect Replication
+# Shiva Agro - Mushroom Website
 
-Implement exactly the screenshot and nothing else
+Fresh & Dry Oyster Mushroom Cultivation & Supply platform built with TanStack Start, React 19, and Tailwind CSS.
 
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://screenshot-perfect-display-689.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/b7b5e0af-58a9-4ac1-bfd9-11d2878126fd).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
