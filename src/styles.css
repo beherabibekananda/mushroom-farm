@@ -68,6 +68,36 @@
   --overlay-hero: linear-gradient(100deg, oklch(0.16 0.03 155 / 0.92) 0%, oklch(0.16 0.03 155 / 0.6) 50%, oklch(0.16 0.03 155 / 0.25) 100%);
 }
 
+.dark,
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0d1c12;
+    --foreground: #f2f5f3;
+    --card: #13271a;
+    --card-foreground: #f2f5f3;
+    --popover: #13271a;
+    --popover-foreground: #f2f5f3;
+    --primary: #52a36b;
+    --primary-foreground: #09130d;
+    --secondary: #183121;
+    --secondary-foreground: #d2e4d7;
+    --muted: #162c1e;
+    --muted-foreground: #a6bba9;
+    --accent: #d4a34b;
+    --accent-foreground: #101c13;
+    --border: rgba(255, 255, 255, 0.12);
+    --input: rgba(255, 255, 255, 0.15);
+    --ring: #d4a34b;
+    --gold: #e2b45e;
+    --forest: #0a170e;
+    --forest-foreground: #f4f7f5;
+    --earth: #7bc794;
+    --cream: #14281c;
+    --shadow-soft: 0 20px 50px -25px rgba(0, 0, 0, 0.65);
+    --overlay-hero: linear-gradient(100deg, rgba(8,16,11,0.95) 0%, rgba(8,16,11,0.7) 50%, rgba(8,16,11,0.35) 100%);
+  }
+}
+
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
@@ -80,7 +110,7 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    background-color: #0d1c12;
+    background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;

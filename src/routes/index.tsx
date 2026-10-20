@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main>
+    <main className="bg-[#0d1c12]">
       <Hero />
     </main>
   );
