@@ -26,8 +26,8 @@ export function Hero() {
 
       {/* Main image container */}
       <div className="relative z-10 w-full flex items-center justify-center pt-16 pb-6 px-3 sm:px-4 md:p-0 md:h-full md:min-h-[100svh]">
-        <picture className="w-full max-w-sm sm:max-w-md md:max-w-none md:absolute md:inset-0 pointer-events-none select-none flex items-center justify-center">
-          <source media="(max-width: 767px)" srcSet={heroBannerMobile} type="image/webp" />
+        <picture className="w-full max-w-sm sm:max-w-md md:max-w-none md:absolute md:inset-0 pointer-events-none select-none flex items-center justify-center aspect-[9/16] md:aspect-auto">
+          <source media="(max-width: 767px)" srcSet={heroBannerMobile} width={576} height={1024} type="image/webp" />
           <img
             src={heroBanner}
             alt="Shiva Agro — Freshness from Nature to Your Table. Premium Oyster Mushrooms, Fresh & Dry Mushrooms"
@@ -35,7 +35,8 @@ export function Hero() {
             height={576}
             fetchPriority="high"
             loading="eager"
-            className="w-full h-auto rounded-2xl md:rounded-none object-contain md:object-cover object-center shadow-[0_15px_40px_rgba(0,0,0,0.6)] md:shadow-none border border-white/10 md:border-none transition-all duration-300 md:h-full md:w-full"
+            decoding="async"
+            className="w-full h-full max-h-[78vh] md:max-h-none rounded-2xl md:rounded-none object-contain md:object-cover object-center shadow-[0_15px_40px_rgba(0,0,0,0.6)] md:shadow-none border border-white/10 md:border-none transition-all duration-300 md:h-full md:w-full"
           />
         </picture>
       </div>

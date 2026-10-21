@@ -16,6 +16,7 @@ import { Navbar } from "../components/site/Navbar";
 import { Footer } from "../components/site/Footer";
 import { SITE } from "@/lib/site";
 import { ThemeProvider } from "@/lib/theme";
+import heroBannerMobile from "@/assets/landing-banner-mobile.webp";
 
 function NotFoundComponent() {
   return (
@@ -84,6 +85,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       {
+        rel: "preload",
+        as: "image",
+        href: heroBannerMobile,
+        type: "image/webp",
+        media: "(max-width: 767px)",
+      },
+      {
         rel: "stylesheet",
         href: appCss,
       },
@@ -91,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;600&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       { rel: "icon", href: "/logo.webp", type: "image/webp" },

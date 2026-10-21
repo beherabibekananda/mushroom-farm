@@ -12,6 +12,8 @@ export function Logo({ light = true, className }: { light?: boolean; className?:
       <img
         src={logoImg}
         alt={`${SITE.name} Brand Logo`}
+        width={44}
+        height={44}
         className="h-10 w-10 sm:h-11 sm:w-11 rounded-full object-cover border-2 border-gold shadow-md transition-transform duration-300 group-hover:scale-105 bg-white shrink-0"
       />
       <div className="flex flex-col">
