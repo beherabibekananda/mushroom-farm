@@ -59,27 +59,9 @@ export function Hero() {
         <p>Fresh and Dry Oyster Mushrooms Cultivation & Supply Across India. Shiva Agro, Varanasi, Uttar Pradesh.</p>
       </div>
 
-      {/* Interactive Hotspot container mapped directly over the 'Explore Our Products ->' button */}
-      <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
-        {/* Desktop hotspot over horizontal banner */}
-        <div className="relative w-full h-full max-w-[1920px] hidden md:block">
-          <Link
-            to="/products"
-            aria-label="Explore Our Products"
-            style={{
-              left: "13.6%",
-              top: "62.2%",
-              width: "23.8%",
-              height: "12.5%",
-            }}
-            className="pointer-events-auto absolute rounded-full transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(76,175,80,0.6)] focus:outline-none focus:ring-4 focus:ring-gold/60 cursor-pointer"
-          >
-            <span className="sr-only">Explore Our Products</span>
-          </Link>
-        </div>
-
-        {/* Mobile hotspot mapped directly over the hero area linking to products */}
-        <div className="relative w-full h-full max-w-[500px] md:hidden">
+      {/* Mobile hotspot mapped directly over the hero area linking to products */}
+      <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center md:hidden">
+        <div className="relative w-full h-full max-w-[500px]">
           <Link
             to="/products"
             aria-label="Explore Our Products"

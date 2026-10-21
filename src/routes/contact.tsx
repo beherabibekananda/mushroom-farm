@@ -78,7 +78,6 @@ function ContactPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="Get in Touch"
         title="Contact Shiva Agro"
         titleAccent="— Varanasi."
         subtitle={`Reach ${SITE.founder} for product enquiries, bulk quotes, and supply arrangements. We aim to respond promptly to all enquiries.`}

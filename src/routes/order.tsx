@@ -9,6 +9,9 @@ import {
   type Address,
 } from "@/lib/order";
 import { cn } from "@/lib/utils";
+import logoImg from "@/assets/logo.webp";
+import { ShoppingBag, MapPin, FileText, CheckCircle2, AlertCircle, Phone, User, Building, Printer, Download } from "lucide-react";
+import { generateInvoicePdf } from "@/lib/pdfInvoice";
 
 export const Route = createFileRoute("/order")({
   head: () => ({
@@ -670,16 +673,26 @@ function ReviewStep({
   if (sent) {
     return (
       <div className="text-center py-12">
-        <div className="text-6xl mb-4">🎉</div>
-        <h2 className="text-3xl font-serif font-medium mb-3">Order Sent!</h2>
+        <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-primary/10 text-primary">
+          <CheckCircle2 size={36} strokeWidth={2} />
+        </div>
+        <h2 className="text-3xl font-serif font-medium mb-3">Order Request Sent</h2>
         <p className="text-muted-foreground max-w-md mx-auto text-sm leading-relaxed mb-2">
-          Your provisional order has been forwarded to <strong>{SITE.name}</strong> via WhatsApp.
-          They will confirm pricing and availability soon.
+          Your provisional order request has been forwarded to <strong>{SITE.name}</strong> via WhatsApp.
+          Our team will confirm current pricing, packaging, and delivery schedule.
         </p>
-        <div className="mt-2 mb-6 inline-flex items-center gap-2 bg-primary/5 border border-primary/20 rounded-full px-4 py-2 text-xs font-mono font-semibold text-primary">
-          📋 Ref: {orderRef}
+        <div className="mt-2 mb-6 inline-flex items-center gap-2 bg-secondary border border-border rounded-full px-4 py-2 text-xs font-mono font-semibold text-foreground">
+          Reference: {orderRef}
         </div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <button
+            type="button"
+            onClick={() => generateInvoicePdf(orderRef, items, address)}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-gold bg-gold text-[#0f1f14] px-6 py-2.5 text-sm font-bold shadow-md shadow-gold/20 hover:brightness-105 transition-all"
+          >
+            <Download size={15} />
+            <span>Download Invoice PDF</span>
+          </button>
           <button
             id="new-order"
             onClick={() => {
@@ -704,106 +717,132 @@ function ReviewStep({
 
   return (
     <div>
-      <div className="mb-6">
-        <h2 className="text-2xl font-serif font-medium">Review Your Order</h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          Please review the details before sending to WhatsApp.
-        </p>
-      </div>
-
-      {/* Order Ref */}
-      <div className="flex items-center gap-3 mb-5 bg-gold/10 border border-gold/30 rounded-xl px-4 py-3">
-        <span className="text-lg">📋</span>
-        <div>
-          <div className="text-xs text-muted-foreground">Order Reference</div>
-          <div className="font-mono font-bold text-sm text-foreground">{orderRef}</div>
+      {/* Formal Invoice Letterhead with Logo */}
+      <div className="mb-6 rounded-2xl border border-border bg-card p-5 sm:p-7 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-5">
+          <div className="flex items-center gap-3.5">
+            <img
+              src={logoImg}
+              alt={SITE.name}
+              className="h-12 w-12 rounded-full object-cover border-2 border-gold bg-white shadow-sm shrink-0"
+            />
+            <div>
+              <h2 className="font-serif text-2xl font-bold tracking-tight text-foreground leading-none">
+                {SITE.name}
+              </h2>
+              <p className="text-xs uppercase tracking-widest text-gold font-semibold mt-1">
+                Fresh & Dry Oyster Mushroom Cultivation
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-0.5">
+                {SITE.address}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col sm:items-end gap-2">
+            <div className="flex items-center gap-2">
+              <span className="inline-block rounded-md bg-secondary px-2.5 py-1 text-[11px] font-bold tracking-wider uppercase text-foreground">
+                Provisional Order
+              </span>
+              <button
+                type="button"
+                onClick={() => generateInvoicePdf(orderRef, items, address)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1 text-xs font-semibold text-foreground hover:border-gold hover:text-gold transition-colors shadow-xs"
+                title="Download or Print PDF Invoice"
+              >
+                <Download size={13} />
+                <span>Download PDF</span>
+              </button>
+            </div>
+            <div className="mt-1 font-mono text-xs font-bold text-foreground">
+              Ref: {orderRef}
+            </div>
+            <div className="text-[11px] text-muted-foreground">
+              {new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}
+            </div>
+          </div>
         </div>
+        <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
+          Please review your itemized quotation and delivery destination before forwarding to our sales team on WhatsApp. You can also download a formal PDF copy for your records.
+        </p>
       </div>
 
       <div className="space-y-4">
         {/* Products */}
         <div className="rounded-2xl border border-border bg-card overflow-hidden">
-          <div className="px-4 py-3 border-b border-border bg-muted/30">
-            <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
-              🛒 Products Ordered
+          <div className="px-5 py-3.5 border-b border-border bg-muted/30 flex items-center gap-2">
+            <ShoppingBag size={15} className="text-primary" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Order Items
             </h3>
           </div>
           <div className="divide-y divide-border">
             {items.map((item) => (
-              <div key={item.productId} className="flex items-center gap-3 px-4 py-3">
+              <div key={item.productId} className="flex items-center gap-3 px-5 py-3.5">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-14 h-14 rounded-xl object-cover flex-shrink-0"
+                  className="w-14 h-14 rounded-xl object-cover flex-shrink-0 border border-border"
                 />
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold text-sm text-foreground truncate">
                     {item.name}
                   </div>
                   <div className="text-xs text-muted-foreground mt-0.5">
-                    Qty: {item.quantity} {item.unit.toUpperCase()}
+                    Quantity: <span className="font-medium text-foreground">{item.quantity} {item.unit.toUpperCase()}</span>
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0">
                   {item.priceRange ? (
                     <div className="text-xs font-semibold text-gold">{item.priceRange}</div>
                   ) : (
-                    <div className="text-xs text-muted-foreground italic">Price TBD</div>
+                    <div className="text-xs text-muted-foreground italic">Price on request</div>
                   )}
                 </div>
               </div>
             ))}
           </div>
           {/* Note about pricing */}
-          <div className="px-4 py-3 border-t border-border bg-amber-50/50">
-            <p className="text-xs text-amber-700 leading-relaxed">
-              ⚠️ This is a <strong>quotation request</strong>. Final pricing will be confirmed by{" "}
-              {SITE.name} via WhatsApp before processing payment.
+          <div className="px-5 py-3 border-t border-border bg-muted/20 flex items-start gap-2.5">
+            <AlertCircle size={15} className="text-earth shrink-0 mt-0.5" />
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              <strong>Notice:</strong> This is a provisional quotation request. Final rate confirmation and logistics schedules will be shared directly by {SITE.name} via WhatsApp.
             </p>
           </div>
         </div>
 
         {/* Address */}
         <div className="rounded-2xl border border-border bg-card overflow-hidden">
-          <div className="px-4 py-3 border-b border-border bg-muted/30">
-            <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
-              📦 Delivery Address
+          <div className="px-5 py-3.5 border-b border-border bg-muted/30 flex items-center gap-2">
+            <MapPin size={15} className="text-primary" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Delivery Destination
             </h3>
           </div>
-          <div className="px-4 py-3 space-y-1.5">
-            <div className="flex items-center gap-2">
-              <span className="text-base">👤</span>
-              <span className="font-semibold text-sm">{address.name}</span>
+          <div className="px-5 py-4 grid gap-3 sm:grid-cols-2 text-xs">
+            <div>
+              <p className="text-muted-foreground uppercase tracking-wider text-[10px]">Contact Person</p>
+              <p className="font-semibold text-sm text-foreground mt-0.5">{address.name}</p>
+              <p className="text-muted-foreground mt-1">Mobile: +91 {address.phone}</p>
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>📞</span>
-              <span>+91 {address.phone}</span>
-            </div>
-            <div className="flex items-start gap-2 text-sm text-muted-foreground">
-              <span className="mt-0.5">🏠</span>
-              <span>
-                {address.addressLine}
-                {address.landmark ? `, near ${address.landmark}` : ""}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>📮</span>
-              <span>
-                {address.city}, {address.state} – {address.pincode}
-              </span>
+            <div>
+              <p className="text-muted-foreground uppercase tracking-wider text-[10px]">Shipping Address</p>
+              <p className="font-medium text-foreground mt-0.5 leading-relaxed">{address.addressLine}</p>
+              {address.landmark && <p className="text-muted-foreground mt-0.5">Landmark: {address.landmark}</p>}
+              <p className="font-semibold text-foreground mt-1">{address.city}, {address.state} — {address.pincode}</p>
             </div>
           </div>
         </div>
 
         {/* WhatsApp message preview */}
         <div className="rounded-2xl border border-border bg-card overflow-hidden">
-          <div className="px-4 py-3 border-b border-border bg-muted/30 flex items-center justify-between">
-            <h3 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
-              💬 WhatsApp Message Preview
+          <div className="px-5 py-3.5 border-b border-border bg-muted/30 flex items-center gap-2">
+            <FileText size={15} className="text-primary" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              WhatsApp Order Preview
             </h3>
           </div>
-          <div className="px-4 py-3">
-            <pre className="text-xs text-muted-foreground whitespace-pre-wrap break-words font-mono leading-relaxed bg-muted/40 rounded-xl p-3 max-h-52 overflow-y-auto">
+          <div className="p-4">
+            <pre className="text-xs text-muted-foreground whitespace-pre-wrap break-words font-mono leading-relaxed bg-muted/40 rounded-xl p-3.5 max-h-56 overflow-y-auto border border-border/50">
               {message}
             </pre>
           </div>
@@ -902,19 +941,7 @@ function OrderPage() {
           </a>
           <div>
             <div className="text-sm font-bold text-foreground">{SITE.name}</div>
-            <div className="text-[10px] text-muted-foreground">Secure Order</div>
-          </div>
-          <div className="ml-auto flex items-center gap-1.5 text-[11px] text-muted-foreground">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="w-3.5 h-3.5 text-primary"
-            >
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            Secured
+            <div className="text-[10px] text-muted-foreground">Order Request</div>
           </div>
         </div>
       </div>

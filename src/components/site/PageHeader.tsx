@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { Leaf, Reveal } from "./primitives";
 
 interface PageHeaderProps {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   titleAccent?: string;
   subtitle: string;
@@ -25,7 +25,7 @@ export function PageHeader({ eyebrow, title, titleAccent, subtitle, breadcrumb }
             <span className="text-gold">{breadcrumb}</span>
           </nav>
 
-          <p className="eyebrow text-[0.68rem] sm:text-xs">{eyebrow}</p>
+          {eyebrow && <p className="eyebrow text-[0.68rem] sm:text-xs">{eyebrow}</p>}
           <h1 className="mt-3 sm:mt-4 text-3xl font-medium leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl break-words">
             {title} {titleAccent && <em className="font-light text-gold">{titleAccent}</em>}
           </h1>
